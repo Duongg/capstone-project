@@ -5,7 +5,7 @@ const XAWS = AWSXRay.captureAWS(AWS);
 
 // TODO: Implement the fileStogare logic
 const logger = createLogger('attachmentUtils');
-const bucketName = process.env.ATTACHMENT_S3_BUCKET;
+const bucketName = process.env.S3_BUCKET_NAME;
 const signedUrlExpiration = process.env.SIGNED_URL_EXPIRATION;
 const s3_bucket = new XAWS.S3({
   signatureVersion: 'v4'

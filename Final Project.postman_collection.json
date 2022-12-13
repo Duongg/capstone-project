@@ -6,10 +6,10 @@
 	},
 	"item": [
 		{
-			"name": "TODOs",
+			"name": "Cars",
 			"item": [
 				{
-					"name": "Get all todos",
+					"name": "Get all Cars",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -20,7 +20,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/Cars",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -31,14 +31,14 @@
 							],
 							"path": [
 								"dev",
-								"todos"
+								"Cars"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create todo",
+					"name": "Create Car",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -59,7 +59,7 @@
 							"raw": "{\n\t\"name\": \"Water flowers 2\",\n\t\"dueDate\": \"2019-06-11\"\n}"
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/Cars",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -70,14 +70,14 @@
 							],
 							"path": [
 								"dev",
-								"todos"
+								"Cars"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update todo",
+					"name": "Update Car",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -98,7 +98,7 @@
 							"raw": "{\n\t\"name\": \"Change the world\",\n\t\"dueDate\": \"2019-12-11\",\n\t\"done\": true\n}"
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/0662eaac-4a5d-4f89-b67c-58c4fd9b326c",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/Cars/0662eaac-4a5d-4f89-b67c-58c4fd9b326c",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -109,7 +109,7 @@
 							],
 							"path": [
 								"dev",
-								"todos",
+								"Cars",
 								"0662eaac-4a5d-4f89-b67c-58c4fd9b326c"
 							]
 						}
@@ -117,7 +117,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete todo",
+					"name": "Delete Car",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -138,7 +138,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/d1cabeb0-f24f-418e-9a71-269add1f97fd",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/Cars/d1cabeb0-f24f-418e-9a71-269add1f97fd",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -149,7 +149,7 @@
 							],
 							"path": [
 								"dev",
-								"todos",
+								"Cars",
 								"d1cabeb0-f24f-418e-9a71-269add1f97fd"
 							]
 						}
@@ -172,7 +172,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/0662eaac-4a5d-4f89-b67c-58c4fd9b326c/attachment",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/Cars/0662eaac-4a5d-4f89-b67c-58c4fd9b326c/attachment",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -183,7 +183,7 @@
 							],
 							"path": [
 								"dev",
-								"todos",
+								"Cars",
 								"0662eaac-4a5d-4f89-b67c-58c4fd9b326c",
 								"attachment"
 							]

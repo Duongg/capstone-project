@@ -5,14 +5,13 @@ To implement this project, you need to implement the following functions and con
 
 Auth - this function should implement a custom authorizer for API Gateway that should be added to all other functions.
 
-GetTodos - should return all TODOs for a current user. A user id can be extracted from a JWT token that is sent by the frontend
-
+GetCars - should return all Cars for a current user. A user id can be extracted from a JWT token that is sent by the frontend
 It should return data that looks like this:
 
 {
   "items": [
     {
-      "todoId": "123",
+      "CarId": "123",
       "createdAt": "2019-07-27T20:01:45.424Z",
       "name": "Buy milk",
       "dueDate": "2019-07-29T20:01:45.424Z",
@@ -20,7 +19,7 @@ It should return data that looks like this:
       "attachmentUrl": "http://example.com/image.png"
     },
     {
-      "todoId": "456",
+      "CarId": "456",
       "createdAt": "2019-07-27T20:01:45.424Z",
       "name": "Send a letter",
       "dueDate": "2019-07-29T20:01:45.424Z",
@@ -30,8 +29,11 @@ It should return data that looks like this:
   ]
 }
 
-CreateTodo - should create a new TODO for a current user. A shape of data send by a client application to this function can be found in the CreateTodoRequest.ts file
-It receives a new TODO item to be created in JSON format that looks like this:
+
+
+
+CreateCar - should create a new Car for a current user. A shape of data send by a client application to this function can be found in the CreateCarRequest.ts file
+It receives a new Car item to be created in JSON format that looks like this:
 
 {
   "createdAt": "2019-07-27T20:01:45.424Z",
@@ -40,11 +42,11 @@ It receives a new TODO item to be created in JSON format that looks like this:
   "done": false,
   "attachmentUrl": "http://example.com/image.png"
 }
-It should return a new TODO item that looks like this:
+It should return a new Car item that looks like this:
 
 {
   "item": {
-    "todoId": "123",
+    "CarId": "123",
     "createdAt": "2019-07-27T20:01:45.424Z",
     "name": "Buy milk",
     "dueDate": "2019-07-29T20:01:45.424Z",
@@ -52,8 +54,12 @@ It should return a new TODO item that looks like this:
     "attachmentUrl": "http://example.com/image.png"
   }
 }
-UpdateTodo - should update a TODO item created by a current user. A shape of data send by a client application to this function can be found in the UpdateTodoRequest.ts file
-It receives an object that contains three fields that can be updated in a TODO item:
+
+
+
+
+UpdateCar - should update a Car item created by a current user. A shape of data send by a client application to this function can be found in the UpdateCarRequest.ts file
+It receives an object that contains three fields that can be updated in a Car item:
 
 {
   "name": "Buy bread",
@@ -61,14 +67,21 @@ It receives an object that contains three fields that can be updated in a TODO i
   "done": true
 }
 The id of an item that should be updated is passed as a URL parameter.
-
 It should return an empty body.
 
-DeleteTodo - Should delete a TODO item created by a current user 
-           - Delete S3 bucket object belong to this TODO item (if exist). Expects an id of a TODO item to remove.
+
+
+
+
+DeleteCar - Should delete a Car item created by a current user 
+           - Delete S3 bucket object belong to this Car item (if exist). Expects an id of a Car item to remove.
 It should return an empty body.
 
-GenerateUploadUrl - returns a pre-signed URL that can be used to upload an attachment file for a TODO item.
+
+
+
+
+GenerateUploadUrl - returns a pre-signed URL that can be used to upload an attachment file for a Car item.
 It should return a JSON object that looks like this:
 
 {

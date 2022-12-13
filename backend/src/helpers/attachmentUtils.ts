@@ -3,7 +3,7 @@ import * as AWSXRay from 'aws-xray-sdk';
 import { createLogger } from '../utils/logger';
 const XAWS = AWSXRay.captureAWS(AWS);
 
-// TODO: Implement the fileStogare logic
+// Car: Implement the fileStogare logic
 const logger = createLogger('attachmentUtils');
 const bucketName = process.env.S3_BUCKET_NAME;
 const signedUrlExpiration = process.env.SIGNED_URL_EXPIRATION;
@@ -11,22 +11,22 @@ const s3_bucket = new XAWS.S3({
   signatureVersion: 'v4'
 });
 
-export async function createPresignUrl(todoId: string): Promise<string> {
+export async function createPresignUrl(carId: string): Promise<string> {
   return s3_bucket.getSignedUrl("putObject", {
     Bucket: bucketName,
-    Key: todoId,
+    Key: carId,
     Expires: parseInt(signedUrlExpiration)
   });
 }
 
-export function createAttachmentUrl(todoId: string): string {
-  return `https://${bucketName}.s3.amazonaws.com/${todoId}`;
+export function createAttachmentUrl(carId: string): string {
+  return `https://${bucketName}.s3.amazonaws.com/${carId}`;
 }
 
-export async function deleteAttachmentUrl(todoId: string) {
+export async function deleteAttachmentUrl(carId: string) {
   const params = {
     Bucket: bucketName,
-    Key: todoId
+    Key: carId
   };
 
   try {

@@ -27,9 +27,9 @@ provider:
   # Use these variables in the functions and resouorces section below. For example,
   # ${self:provider.environment.S3_BUCKET_NAME}
   environment:
-    TODOS_TABLE: udacity-capstone-project-05-${self:provider.stage}
-    TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    S3_BUCKET_NAME: udacity-capstone-project-05-${self:provider.stage}
+    CARS_TABLE: udacity-capstone-project-052201-${self:provider.stage}
+    CARS_CREATED_AT_INDEX: CreatedAtIndex
+    S3_BUCKET_NAME: udacity-capstone-project-052201-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
 
   logs:
@@ -47,7 +47,7 @@ provider:
         - Effect: Allow
           Action:
             - dynamodb:Query
-          Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}/index/${self:provider.environment.TODOS_CREATED_AT_INDEX}
+          Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CARS_TABLE}/index/${self:provider.environment.CARS_CREATED_AT_INDEX}
 
 custom:
   webpack:
@@ -57,90 +57,90 @@ custom:
     api:
       info:
         version: v1.0.0
-        title: Serverless Todo App
-        description: A Todos application using Serverless framework.
+        title: Serverless Car App
+        description: A Cars application using Serverless framework.
     models:
-      - name: CreateTodoRequest
+      - name: CreateCarRequest
         contentType: application/json
-        schema: ${file(models/create-todo-model.json)}
-      - name: UpdateTodoRequest
+        schema: ${file(models/create-car-model.json)}
+      - name: UpdateCarRequest
         contentType: application/json
-        schema: ${file(models/update-todo-model.json)}
+        schema: ${file(models/update-car-model.json)}
 
 functions:
   Auth:
     handler: src/lambda/auth/auth0Authorizer.handler
 
-  # TODO: Configure this function -
+  # Car: Configure this function -
   # Provide iamRoleStatements property for performing Actions on DynamoDB
-  GetTodos:
-    handler: src/lambda/http/getTodos.handler
+  GetCars:
+    handler: src/lambda/http/getCars.handler
     events:
       - http:
           method: get
-          path: todos
+          path: Cars
           cors: true
           authorizer: Auth
     iamRoleStatements:
       - Effect: Allow
         Action:
           - dynamodb:Query
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CARS_TABLE}
 
-  # TODO: Configure this function -
+  # Car: Configure this function -
   # Provide iamRoleStatements property. Decide the Actions and AWS Resource.
   # To refer to an AWS resource defined in the "Resources" section, you can use "Resource: !GetAtt <resource-name>.Arn"
   # To validate incoming HTTP requests, we have provided the request schemas in function definition below.
-  CreateTodo:
-    handler: src/lambda/http/createTodo.handler
+  CreateCar:
+    handler: src/lambda/http/createCar.handler
     events:
       - http:
           method: post
-          path: todos
+          path: cars
           cors: true
           authorizer: Auth
           reqValidatorName: RequestBodyValidator
           documentation:
-            description: Create Todo Request
+            description: Create Car Request
             requestModels:
-              application/json: CreateTodoRequest
+              application/json: CreateCarRequest
     iamRoleStatements:
       - Effect: Allow
         Action:
           - dynamodb:Query
           - dynamodb:PutItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CARS_TABLE}
 
-  # TODO: Configure this function
+  # Car: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements, and request schemas
-  UpdateTodo:
-    handler: src/lambda/http/updateTodo.handler
+  UpdateCar:
+    handler: src/lambda/http/updateCar.handler
     events:
       - http:
           method: patch
-          path: todos/{todoId}
+          path: cars/{carId}
           cors: true
           authorizer: Auth
           reqValidatorName: RequestBodyValidator
           documentation:
-            description: Update Todo Request
+            description: Update Car Request
             requestModels:
-              application/json: UpdateTodoRequest
+              application/json: UpdateCarRequest
     iamRoleStatements:
       - Effect: Allow
         Action:
           - dynamodb:Query
           - dynamodb:UpdateItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CARS_TABLE}
 
-  # TODO: Configure this function
+  # Car: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
-  DeleteTodo:
-    handler: src/lambda/http/deleteTodo.handler
+  DeleteCar:
+    handler: src/lambda/http/deleteCar.handler
     events:
       - http:
           method: delete
-          path: todos/{todoId}
+          path: cars/{carId}
           cors: true
           authorizer: Auth
     iamRoleStatements:
@@ -148,20 +148,20 @@ functions:
         Action:
           - dynamodb:Query
           - dynamodb:DeleteItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CARS_TABLE}
       - Effect: Allow
         Action:
           - s3:DeleteObject
         Resource: arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
 
-  # TODO: Configure this function
+  # Car: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
   GenerateUploadUrl:
     handler: src/lambda/http/generateUploadUrl.handler
     events:
       - http:
           method: post
-          path: todos/{todoId}/attachment
+          path: cars/{carId}/attachment
           cors: true
           authorizer: Auth
     iamRoleStatements:
@@ -174,7 +174,7 @@ functions:
         Action:
           - dynamodb:Query
           - dynamodb:UpdateItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CARS_TABLE}
       - Effect: Allow
         Action:
           - s3:PutObject
@@ -193,7 +193,7 @@ resources:
         ValidateRequestParameters: false
 
     # Add necessary AWS resources. You will need at least the following AWS resources
-    # TODO: Fill the properties
+    # Car: Fill the properties
     # Feel free to change the names as you like.
     GatewayResponseDefault4XX:
       Type: AWS::ApiGateway::GatewayResponse
@@ -206,26 +206,26 @@ resources:
         RestApiId:
           Ref: ApiGatewayRestApi
 
-    # TODO: Create a DynamoDB table with local secondary index and a composite key
-    TodosTable:
+    # Car: Create a DynamoDB table with local secondary index and a composite key
+    CarsTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: S
-          - AttributeName: todoId
+          - AttributeName: carId
             AttributeType: S
           - AttributeName: createdAt
             AttributeType: S
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
-          - AttributeName: todoId
+          - AttributeName: carId
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.TODOS_TABLE}
+        TableName: ${self:provider.environment.CARS_TABLE}
         LocalSecondaryIndexes:
-          - IndexName: ${self:provider.environment.TODOS_CREATED_AT_INDEX}
+          - IndexName: ${self:provider.environment.CARS_CREATED_AT_INDEX}
             KeySchema:
               - AttributeName: userId
                 KeyType: HASH
@@ -234,7 +234,7 @@ resources:
             Projection:
               ProjectionType: ALL # What attributes will be copied to an index
 
-    # TODO: Complete the bucket properties below.
+    # Car: Complete the bucket properties below.
     # Do not forget to add the CorsConfiguration propoerty
     AttachmentsBucket:
       Type: AWS::S3::Bucket
@@ -254,7 +254,7 @@ resources:
                 - HEAD
               MaxAge: 3000
 
-    # TODO: Complete the policy below and attach it to the bucket defined above
+    # Car: Complete the policy below and attach it to the bucket defined above
     # For cross referencing the name of the bucket, use "!Ref AttachmentsBucket"
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
